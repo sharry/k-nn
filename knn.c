@@ -116,7 +116,7 @@ int main()
 	printf("%d", n);
 
 	// Testing subject
-	printf("Find whether a color belongs to light mode or dark mode using k-nn algorithm.\n");
+	printf("Find whether a color belongs to light colors or dark colors using k-nn algorithm.\n");
 	printf("\nDefine your color (RGB)\n\n");
 	int r, g, b;
 	do
@@ -141,7 +141,7 @@ int main()
 	subject.G = g;
 	subject.B = b;
 	classifyAColor(colors, n, &subject);
-	printf("\nThis color (#%02X%02X%02X) is suitable for %s mode theme.",
+	printf("\nThis color (#%02X%02X%02X) is a %s color.",
 		   subject.R,
 		   subject.G,
 		   subject.B,
