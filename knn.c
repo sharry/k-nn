@@ -92,6 +92,7 @@ void fillColor(char *line, Color *color, int *p)
 	(*p)++;
 }
 
+// Fetch colors from the csv dataset and returns number of colors
 int readColorsFromCSV(char *filename, Color *color, int *p)
 {
 	FILE *stream = fopen(filename, "r");
