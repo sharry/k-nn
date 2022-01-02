@@ -1,12 +1,12 @@
 // C program to classify colors
-// using k-nearest-neighbour algorithm.
+// using k-nearest-neighbors algorithm.
 
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #define line_size 300
-#define mode_size 100
+#define class_size 100
 #define colors_size 100
 
 // Radius
@@ -15,9 +15,9 @@
 // Structure of colors
 typedef struct
 {
-	char mode[mode_size]; // Whether the color is dark or light
-	int R, G, B;		  // Co-ordinate of the color in the RGB model
-	double distance;	  // Distance from the subject point
+	char class[class_size]; // Whether the color is dark or light
+	int R, G, B;			// Co-ordinate of the color in the RGB model
+	double distance;		// Distance from the subject point
 } Color;
 
 // Function to sort an array of colors by distance
@@ -37,7 +37,7 @@ void sortByDistance(Color *colors, int n)
 
 // This function finds classification of a color 'c' using
 // k nearest neighbour algorithm. It classes the color as either
-// a 'dark mode color' or a 'light mode colors'.
+// 'dark' or 'light'.
 
 void classifyAColor(Color *colors, int n, Color *c)
 {
@@ -60,16 +60,16 @@ void classifyAColor(Color *colors, int n, Color *c)
 
 	for (int i = 0; i < k; i++)
 	{
-		if (strcmp((colors + i)->mode, "dark") == 0)
+		if (strcmp((colors + i)->class, "dark") == 0)
 			frequencyOfNeibouringDarkColors++;
-		else if (strcmp((colors + i)->mode, "light") == 0)
+		else if (strcmp((colors + i)->class, "light") == 0)
 			frequencyOfNeibouringLightColors++;
 	}
 
 	if (frequencyOfNeibouringDarkColors > frequencyOfNeibouringLightColors)
-		strcpy(c->mode, "dark");
+		strcpy(c->class, "dark");
 	else
-		strcpy(c->mode, "light");
+		strcpy(c->class, "light");
 }
 
 void fillColor(char *line, Color *color, int *p)
@@ -83,8 +83,8 @@ void fillColor(char *line, Color *color, int *p)
 		values[i++] = token;
 		token = (char *)strtok(NULL, ",");
 	}
-	strncpy(c.mode, values[0], 20);
-	strtok(c.mode, "\n");
+	strncpy(c.class, values[0], 20);
+	strtok(c.class, "\n");
 	c.R = atoi(values[1]);
 	c.G = atoi(values[2]);
 	c.B = atoi(values[3]);
@@ -121,17 +121,17 @@ int main()
 	int r, g, b;
 	do
 	{
-		printf("Red value (0 - 255):\t");
+		printf("Red value\t(0 - 255) :\t");
 		scanf("%d", &r);
 	} while (r < 0 || r > 255);
 	do
 	{
-		printf("Green value (0 - 255):\t");
+		printf("Green value\t(0 - 255) :\t");
 		scanf("%d", &g);
 	} while (g < 0 || g > 255);
 	do
 	{
-		printf("Blue value (0 - 255):\t");
+		printf("Blue value\t(0 - 255) :\t");
 		scanf("%d", &b);
 	} while (b < 0 || b > 255);
 
@@ -145,7 +145,7 @@ int main()
 		   subject.R,
 		   subject.G,
 		   subject.B,
-		   subject.mode);
+		   subject.class);
 
 	return 0;
 }
